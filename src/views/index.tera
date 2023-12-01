@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TodoMVC</title>
+    <link rel="stylesheet" href="css/todomvc-common.css" />
+    <link rel="stylesheet" href="css/todomvc-app-css.css" />
+</head>
+<body>
+    <section class="todoapp">
+        <header class="header">
+            <h1>todos</h1>
+            <form hx-post="/todos" hx-target="#todo-list" hx-swap="afterbegin">
+                <input type="text" class="new-todo" name="title" placeholder="What needs to be done?" autofocus />
+            </form>
+        </header>
+        <section class="main">
+            <input class="toggle-all" id="toggle-all" type="checkbox" {% if allCompleted %}checked{% endif %} />
+            <label
+                    for="toggle-all"
+                    hx-post="/todos/toggle-all?filter={{filter}}"
+                    hx-target="#todo-list"
+            >
+                Mark all as complete
+            </label>
+            {% include "todo_list.tera" %}
+        </section>
+        <footer class="footer">
+            <ul class="filters">
+                <li>
+                    <a href="/?filter=all" class="{% if filter=='all' %}selected{% endif %}">All</a>
+                </li>
+                <li>
+                    <a href="/?filter=active" class="{% if filter=='active' %}selected{% endif %}">Active</a>
+                </li>
+                <li>
+                    <a href="/?filter=completed" class="{% if filter=='completed' %}selected{% endif %}">Completed</a>
+                </li>
+            </ul>
+            <button class="clear-completed" hx-post="/todos/clear-completed?filter={{ filter }}" hx-target='#todo-list'>Clear completed</button>
+        </footer>
+    </section>
+    <footer class="info">
+        <p>Click to edit a todo</p>
+        <p>| Template by <a href="https://sindresorhus.com">Sindre Sorhus</a></p>
+        <p>| Created by <a href="https://tomaszmik.us">Tomasz Mikus</a></p>
+        <p>| Part of <a href="https://todomvc.com">TodoMVC</a></p>
+    </footer>
+    <script src="js/htmx.1.9.9.min.js"></script>
+</body>
+</html>

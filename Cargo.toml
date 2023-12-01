@@ -1,0 +1,21 @@
+[package]
+name = "todomvc-htmx-rust-rocket"
+version = "0.1.0"
+edition = "2021"
+authors = ["Tomasz Mikus <mikus.tomasz@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "todomvc-htmx-rust-rocket"
+path = "src/main.rs"
+
+[dependencies]
+lazy_static = "1.4.0"
+rocket = "0.5.0"
+rusqlite = {  version = "0.30.0" , features = ["bundled"] }
+tera = "1.19.1"
+
+[build-dependencies]
+copy_to_output = "2.1.0"
+glob = "0.3.1"
